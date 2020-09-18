@@ -39,7 +39,9 @@ class CSVParser {
 
   Map<String, dynamic> getLanguageMap(String localeName) {
     final indexLocale = lines.first.indexOf(localeName);
-
+    if (indexLocale < 0) {
+      throw Exception("Locale $localeName not found in csv file. Available locales: ${lines.first}");
+    }
     var translations = <String, dynamic>{};
     for (var i = 1; i < lines.length; i++) {
       translations.addAll({lines[i][0]: lines[i][indexLocale]});

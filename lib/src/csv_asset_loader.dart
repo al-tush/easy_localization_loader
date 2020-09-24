@@ -30,8 +30,22 @@ class CSVParser {
   final List<List<dynamic>> lines;
 
   CSVParser(this.strings, {this.fieldDelimiter = ','})
-      : lines = CsvToListConverter()
-            .convert(strings, fieldDelimiter: fieldDelimiter);
+      : lines = _convertN(
+      CsvToListConverter()
+      .convert(strings, fieldDelimiter: fieldDelimiter)
+  );
+
+  static List<List<dynamic>> _convertN(List<List<dynamic>> lines) {
+    // converts //n to /n
+    lines.forEach((lineList) {
+      lineList.asMap().forEach((key, value) {
+        if ((value is String) && value.contains('\\n')) {
+          lineList[key] = value.replaceAll('\\n', '\n');
+        }
+      });
+    });
+    return lines;
+  }
 
   List getLanguages() {
     return lines.first.sublist(1, lines.first.length);

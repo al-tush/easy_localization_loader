@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:ui';
 
-import 'package:csv/csv.dart';
 import 'package:flutter/services.dart';
 
 import 'asset_loader.dart';

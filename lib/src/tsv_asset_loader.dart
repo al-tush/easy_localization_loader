@@ -33,7 +33,7 @@ class TSVParser {
   static List<List<dynamic>> _convert(String str) {
     final lines = str.split('\n')
         .map<List<String>>((e) => e.split('\t').map(
-            (e) => e.trim()
+            (e) => e.trimRight()
             .replaceAll('\\n', '\n')
             .replaceAllMapped(RegExp(r'\\u([0-9A-Fa-f]{4})'), (Match match) {
           return String.fromCharCode(int.parse(match.group(1)!, radix: 16));
